@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import List from "./List";
 import './TodoList.css';
 
 function TodoList() {
@@ -8,15 +9,16 @@ function TodoList() {
 
     
     const changeHandler = (e) => { // adding items through input
-        console.log("Current value", e.target.value);
-        setcurrentItem(e.target.value);
+        // console.log("Current value", e.target.value);
+        setcurrentItem(e.target.value); 
+        // updating state with data customer updated
     }
 
     const addItemList = () => {
         updateItemList([...itemList, {item: currentItem, key: Date.now()}]);
-        // spread operator will take previous values, and update takes new item also
-        //item set as cuurentItem ans key use to new things
-        setcurrentItem("")
+        /*   spread operator will take previous values, and update takes new item also
+        item set as cuurentItem ans key use to new things */
+        setcurrentItem("") // after item added remove it from input box
         console.log("List item", itemList);
     }
 
@@ -25,9 +27,10 @@ function TodoList() {
             <header className="header">
                 <div className="wrapper">
                     <div className="Input-wrapper">
-                        <input value={currentItem} onChange={changeHandler}/>
+                        <input placeholder="Add item" value={currentItem} onChange={changeHandler}/>
                         <button onClick={addItemList}>+</button>
                     </div>
+                    <List itemList={itemList} updateItemList={updateItemList}/>
                 </div>
             </header>
         </div>
